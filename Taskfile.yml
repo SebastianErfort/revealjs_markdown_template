@@ -1,0 +1,60 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+
+tasks:
+  default: # this is run if no task is specified
+    cmds:
+      - task: readme
+      - task: revealjs_build
+      - task: revealjs_reload
+
+  revealjs_build:
+    desc: Build revealjs HTML slides with Pandoc
+    cmds:
+      - |
+        pandoc --from=markdown -t revealjs --slide-level 2 -s -o slides.html presentation.md \
+        --verbose \
+        -F mermaid-filter
+        # -L revealjs-codeblock.lua # doesn't work atm
+        [[ -f mermaid-filter.err ]] && rm mermaid-filter.err
+    sources:
+      - 'presentation.md'
+      - '*.css'
+      - Taskfile.yml
+    generates:
+      - slides.html
+    method: timestamp # instead of default checksum
+    silent: true
+
+  revealjs_reload:
+    desc: Reload browser windows with revealjs presentation
+    cmds:
+      - ./reload_browser.sh presentation.md
+    silent:
+      true
+
+  gotask:
+    desc: Set up Task (Taskfile/Go-Task, make alternative)
+    cmds:
+      - |
+        sudo snap install task
+
+  readme:
+    desc: Convert README Markdown to HTML using Pandoc and reload viewer
+    vars:
+      TITLE: "Readme reveal.js template"
+    cmds:
+      - |
+        FT=${FT:-html}
+        pandoc --standalone --metadata title="{{.TITLE}}" README.md -o "README.$FT"
+        ./reload_browser.sh README.md
+    sources:
+      - README.md
+      - Taskfile.yml
+    generates:
+      - README.html
+    method: timestamp # instead of default checksum
+    # silent: true

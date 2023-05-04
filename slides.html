@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="English">
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Zefram Cochrane">
+  <meta name="dcterms.date" content="2063-04-05">
+  <title>First Contact</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reset.css">
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/reveal.css">
+  <style>
+    .reveal .sourceCode {  /* see #7635 */
+      overflow: visible;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/reveal.js@^4//dist/theme/black.css" id="theme">
+  <!--
+      Fontawesome icons
+      Links:
+        - animate: https://fontawesome.com/docs/web/style/animate
+      Example:
+        <i class="fa-brands fa-linux"></i> -->
+  <p><link rel="stylesheet" href="font-awesome/css/all.css"></p>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">First Contact</h1>
+  <p class="author">Zefram Cochrane</p>
+  <p class="date">5 April 2063</p>
+</section>
+
+<section class="slide level2">
+
+<!--
+%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%% Addtional stuff
+%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%% For local clone of reveal.js (else it's fetched from the internet)
+revealjs-url: reveal.js
+title-slide-attributes:
+    data-background-image: /path/to/bg.img
+    data-background-size: contain
+parallaxBackgroundImage: /path/to/bg.img
+
+%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%% All the stuff I thought should work, but doesn't seem to
+%% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%% These variables should be accessible through YAML frontmatter or CL variables, but don't have any
+%% effect. See https://pandoc.org/MANUAL.html#variables-for-html and
+%% `pandoc --print-default-data-file=templates/styles.html`
+mainfont: Futura
+fontsize: 12pt
+linkcolor: green
+backgroundcolor: green
+Maybe needs an `@import url()`?
+css:
+  - 'https://fonts.googleapis.com/css2?family=Oswald&display=swap'
+header-includes: |
+  <style>
+  body {
+      color: rgb(16, 229, 195);
+      background-color: rgb(200, 200, 220);
+  }
+  blockquote {
+    font-style: italic;
+  }
+  tr.even {
+    background-color: #f0f0f0;
+  }
+  td, th {
+    padding: 0.5em 2em 0.5em 0.5em;
+  }
+  tbody {
+    border-bottom: none;
+  }
+  </style>
+-->
+</section>
+<section>
+<section id="reveal.js" class="title-slide slide level1">
+<h1>reveal.js</h1>
+<p><a href="https://revealjs.com">reveal.js</a> is a presentation
+framework using HTML, CSS and Javascript. It is highly customisable and
+offers many features.</p>
+<iframe src="https://revealjs.com/" width="600" height="500">
+</iframe>
+</section>
+<section id="slide-with-a-different-background-image"
+class="slide level2"
+data-background-image="https://intl.startrek.com/sites/default/files/images/2023-04/essay_rr_first-contact-origin.jpg">
+<h2
+data-background-image="https://intl.startrek.com/sites/default/files/images/2023-04/essay_rr_first-contact-origin.jpg">Slide
+with a different background image</h2>
+<div style="color: #ff9501; text-shadow: 0px 0px 10px white)">
+A <font style="color: lime">lime</font> horizontal rule
+<hr style="color: lime; background-color: lime;">
+<div style="font-size: 200%">
+200% font-size text
+</div>
+<small>small text</small>
+</div>
+<div style="text-align: right; position: fixed; bottom: 10px;">
+<p><font style="font-size: 16px; color: lightgrey;">Image credit:
+StarTrek.com / Rob DeHart</font></p>
+</div>
+</section>
+<section id="lists-form-check-boxes" class="slide level2">
+<h2>Lists: Form (Check Boxes)</h2>
+<form>
+<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+<label for="vehicle1"> I have a bike</label><br>
+<input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+<label for="vehicle2"> I have a car</label><br>
+<input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+<label for="vehicle3"> I have a boat</label>
+</form>
+</section>
+<section id="block-quotes" class="slide level2">
+<h2>Block Quotes</h2>
+<div style="display: flex; justify-content: space-between; width: 100%">
+<div style="width: 45%">
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; What he said.</span></span></code></pre></div>
+</div>
+<div style="width: 45%">
+<blockquote>
+<p>What he said.</p>
+</blockquote>
+</div>
+</div>
+</section>
+<section id="code-blocks" class="slide level2">
+<h2>Code Blocks</h2>
+<p>Markdown code blocks</p>
+<div style="display: flex; justify-content: space-between; width: 100%">
+<div style="width: 45%">
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```bash</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">--from</span><span class="op">=</span>markdown <span class="at">-t</span> revealjs <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>-s <span class="at">-o</span> slides.html <span class="pp">*</span>.md <span class="dt">\</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>--css=robot-lung.css <span class="dt">\</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>-V theme=robot-lung</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+</div>
+<div style="width: 45%">
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pandoc</span> <span class="at">--from</span><span class="op">=</span>markdown <span class="at">-t</span> revealjs <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>-s <span class="at">-o</span> slides.html <span class="pp">*</span>.md <span class="dt">\</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>--css=robot-lung.css <span class="dt">\</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>-V theme=robot-lung</span></code></pre></div>
+</div>
+</div>
+<p><font style="color: grey; font-size: 50%; font-style: italic">
+reveal.js features such as syntax highlighting and line numbers don’t
+work well with Pandoc atm without <a
+href="https://github.com/pandoc/lua-filters/tree/master/revealjs-codeblock">external
+filters</a> </font></p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+<p>With <a href="https://revealjs.com/code/">reveal.js</a></p>
+<div style="display: flex; justify-content: space-between; width: 100%">
+<div style="width: 30%">
+<pre><code data-line-numbers="3,8-10">
+<table>
+  <tr>
+    <td>Apples</td>
+    <td>$1</td>
+    <td>7</td>
+  </tr>
+  <tr>
+    <td>Oranges</td>
+    <td>$2</td>
+    <td>18</td>
+  </tr>
+</table>
+</code></pre>
+<p><font style="color: rgba(255,255,255,0.75); font-size: 50%; font-style: italic">TODO:
+This should be raw HTML</font></p>
+</div>
+<div style="width: 65%">
+<iframe src="https://revealjs.com/code/" width="600" height="500">
+</iframe>
+</div>
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p>With <a
+href="https://pandoc.org/MANUAL.html#verbatim-code-blocks">Pandoc</a></p>
+<div style="display: flex; justify-content: space-between; width: 100%">
+<div style="width: 65%">
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">~~~ { .python .number-lines startFrom=&quot;3&quot; }</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">def main():</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">  print( &quot;hello pan&quot; )</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="in">if __name__ == &#39;__main__:</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="in">  main()</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="in">~~~</span></span></code></pre></div>
+</div>
+<div style="width: 35%">
+<div class="sourceCode" id="cb5" data-startFrom="3"><pre
+class="sourceCode numberSource python numberLines"><code class="sourceCode python" style="counter-reset: source-line 2;"><span id="cb5-3"><a href="#cb5-3"></a><span class="kw">def</span> main():</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="bu">print</span>( <span class="st">&quot;hello pan&quot;</span> )</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__:</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="er">  main</span>()</span></code></pre></div>
+</div>
+</div>
+</section>
+<section id="pandoc-line-blocks" class="slide level2">
+<h2>Pandoc: Line Blocks</h2>
+<p><a href="https://pandoc.org/MANUAL.html#line-blocks">Extension:
+<code>line_blocks</code></a></p>
+<p>line breaks and leading spaces are preserved</p>
+<div style="display: flex; justify-content: space-between; width: 100%">
+<div style="width: 55%; font-size: 60%">
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode numberSource markdown number-lines"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1"></a>| The limerick packs laughs anatomical</span>
+<span id="cb6-2"><a href="#cb6-2"></a>| In space that is quite economical.</span>
+<span id="cb6-3"><a href="#cb6-3"></a>|    But the good ones I&#39;ve seen</span>
+<span id="cb6-4"><a href="#cb6-4"></a>|    So seldom are clean</span>
+<span id="cb6-5"><a href="#cb6-5"></a>| And the clean ones so seldom are comical</span></code></pre></div>
+</div>
+<div style="width: 40%; font-size: 60%; text-align: left">
+<div class="line-block">The limerick packs laughs anatomical<br />
+In space that is quite economical.<br />
+   But the good ones I’ve seen<br />
+   So seldom are clean<br />
+And the clean ones so seldom are comical</div>
+</div>
+</div>
+</section>
+<section id="transitions-for-elements-fragments" class="slide level2">
+<h2>Transitions for elements: fragments</h2>
+<ul>
+<li class="fragment fade-in">
+This item will fade in.
+</li>
+<li class="fragment highlight-blue">
+This will be highlighted blue.
+</li>
+<li class="fragment highlight-red">
+All available transitions are documented
+<a src="https://github.com/hakimel/reveal.js/#fragments">here</a>.
+</li>
+</ul>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<p>or use <a
+href="https://pandoc.org/MANUAL.html#incremental-lists">Pandoc’s fenced
+div syntax</a></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>::: incremental</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>this</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>is</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>list</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div>
+</div><div class="column" style="width:50%;">
+<div>
+<ul>
+<li class="fragment">this</li>
+<li class="fragment">is</li>
+<li class="fragment">a</li>
+<li class="fragment">list</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="use-a-pause" class="slide level2">
+<h2>use a pause</h2>
+<div style="display: flex; justify-content: space-between">
+<div style="width: 45%">
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>first content</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>. . .</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;hr&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>later content</span></code></pre></div>
+<p>Mind the empty lines and spaces between periods.</p>
+</div>
+<div style="width: 45%">
+<p>first content</p>
+<div class="fragment">
+<hr>
+later content
+</div>
+</div>
+<!-- This is broken by Pandoc option slide-level=2 -->
+<!-- --- -->
+<!-- <section data-background-color="aquamarine"> -->
+<!--   <h2>Sections: slides with vertical scroll</h2> -->
+<!--   [> ice cone emoji <] -->
+<!--   <h3>🍦</h3> -->
+<!-- </section> -->
+<!-- <section data-background-color="rgb(70, 70, 255)"> -->
+<!--   [> cake piece emoji <] -->
+<!--   <h3>🍰</h3> -->
+<!-- </section> -->
+</div>
+</section>
+<section id="speaker-notes" class="slide level2">
+<h2>Speaker Notes</h2>
+<p>Press <kbd style="font-style: italic;">s</kbd> to activate. Audience
+won’t see these.</p>
+<aside class="notes">
+<p>Totally bs-ing here, don’t let them know</p>
+</aside>
+</section>
+<section id="columns" class="slide level2">
+<h2>Columns</h2>
+<div style="display: flex; justify-content: space-between;">
+<div style="width: 45%">
+<p>Use HTML div’s</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;display: flex;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">  justify-content: space-between&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;width: 50%&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>Column 1</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;div</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;width: 50%&quot;</span><span class="kw">&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>Column 2</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/div&gt;</span></span></code></pre></div>
+</div>
+<div style="width: 45%">
+<p>or <a href="https://pandoc.org/MANUAL.html#columns">Pandoc
+syntax</a></p>
+<div class="sourceCode" id="cb10" data-font-size="20%"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>:::::::::::::: {.columns}</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>::: {.column width=&quot;30%&quot;}</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>Column 1</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>::: {.column width=&quot;70%&quot;}</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>Column 2</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>::::::::::::::</span></code></pre></div>
+</div>
+</div>
+</section>
+<section id="flexible-columns" class="slide level2">
+<h2>Flexible columns</h2>
+<div style="column-count: 2;">
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+ex ea commodo consequat.</p>
+</div>
+</section>
+<section id="tables" class="slide level2">
+<h2>Tables</h2>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>| Title | Project | *Priority* | Due-date | Assignee(s) | Progress | Summary |</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>|-------|---------|------------|----------|-------------|----------|---------|</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>| Improve/rethink usage of issues and boards | backlog | High | 2023 | all | 80% - presented | Can we Kanban? |</span></code></pre></div>
+<p><font style="font-size: 12px;"></p>
+<table>
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 12%" />
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 18%" />
+<col style="width: 14%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Title</th>
+<th>Project</th>
+<th><em>Priority</em></th>
+<th>Due-date</th>
+<th>Assignee(s)</th>
+<th>Progress</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Improve/rethink usage of issues and boards</td>
+<td>backlog</td>
+<td>High</td>
+<td>2023</td>
+<td>all</td>
+<td>80% - presented</td>
+<td>Can we Kanban?</td>
+</tr>
+</tbody>
+</table>
+<p></font></p>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<p>This also works (not in Obsidian)</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>--------------------------------------------------------------------</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="in">             *Drugs*         *Alcohol*           *Tobacco*</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>----------   -------------   -----------------   --------------------</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="in">    Monday     3 Xanax        2 pints             3 cigars,</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="in">                                                  1 hr at hookah bar</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>   Tuesday    14 Adderall     1 Boone&#39;s Farm,     1 packet Drum</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                              2 Thunderbird</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a> Wednesday    2 aspirin       Tall glass water    (can&#39;t remember)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>---------------------------------------------------------------------</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>: You can add captions!</span></code></pre></div>
+<table style="width:97%;">
+<caption>You can add captions!</caption>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 22%" />
+<col style="width: 27%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: left;"><em>Drugs</em></th>
+<th style="text-align: left;"><em>Alcohol</em></th>
+<th style="text-align: left;"><em>Tobacco</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Monday</td>
+<td style="text-align: left;">3 Xanax</td>
+<td style="text-align: left;">2 pints</td>
+<td style="text-align: left;">3 cigars, 1 hr at hookah bar 1 packet
+Drum</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="inline-pictures" class="slide level2">
+<h2>Inline pictures</h2>
+<p>Using HTML</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;a</span> <span class="er">href</span><span class="ot">=</span><span class="st">&quot;link URL&quot;</span><span class="kw">&gt;&lt;img</span> <span class="er">src</span><span class="ot">=</span><span class="st">&quot;image URL&quot;</span> <span class="er">style</span><span class="ot">=</span><span class="st">&quot;width: 40%&quot;</span><span class="kw">/&gt;&lt;/a&gt;</span></span></code></pre></div>
+<p><a href='https://500px.com/photo/1060251686/a-calm-fall-evening-in-reine-by-daniel-gastager' alt='A Calm Fall Evening in Reine by Daniel Gastager on 500px.com'><img src='https://drscdn.500px.org/photo/1060251686/m%3D900/v2?sig=bfa28810a6720723f6531e451a55c0a5583d539d7bb6130b96606f4748fc3eb1' alt='A Calm Fall Evening in Reine by Daniel Gastager on 500px.com' style="width: 40%"/></a></p>
+</section>
+<section id="reveal.js-1" class="slide level2"
+data-background="#FF4081">
+<h2 data-background="#FF4081">reveal.js</h2>
+<p><code>reveal.js</code> will read directives in curly braces, for
+example</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## reveal.js {.slide: data-background=&quot;#FF4081&quot;}</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">## reveal.js {.slide: background=&quot;#FF4081&quot;}</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## reveal.js {background=&quot;#FF4081&quot;}</span></span></code></pre></div>
+<p>which are all equivalent</p>
+</section>
+<section id="logo-headerfooter" class="slide level2">
+<h2>Logo, header/footer</h2>
+<p>Add the following to the <code>.reveal</code> section of your (S)CSS
+theme</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.reveal</span> {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* ... */</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-image</span>: <span class="fu">url(</span><span class="st">logo.png</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-size</span>: <span class="dv">20</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-repeat</span>: <span class="dv">no-repeat</span><span class="op">;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">background-position</span>: <span class="dv">5</span><span class="dt">%</span> <span class="dv">5</span><span class="dt">%</span><span class="op">;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</section>
+<section id="embed-media-websites-videos" class="slide level2">
+<h2>Embed Media (Websites, Videos, …)</h2>
+<iframe title="reveal.js: Media" src="https://revealjs.com/media/" width="100%" height="500">
+</iframe>
+<!-- Seems to have stopped working -->
+<!--  -->
+<!-- ## Full-frame Embed -->
+<!--  -->
+<!-- ```html -->
+<!-- <section data-preload data-background-iframe="https://revealjs.com/media/"> -->
+<!-- </section> -->
+<!-- ``` -->
+<!--  -->
+<!-- <section data-preload data-background-iframe="https://revealjs.com/media/"> -->
+<!-- </section> -->
+</section>
+<section id="mermaid-graphs" class="slide level2">
+<h2>Mermaid Graphs</h2>
+<p>Requires <a href="">Pandoc Mermaid filter</a></p>
+<div style="display: flex; justify-content: space-between;">
+<div style="width: 45%; vertical-align: top;">
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="in">~~~{.mermaid format=svg}</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="in">sequenceDiagram</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="in">    Alice-&gt;&gt;John: Hello John, how are you?</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="in">    John--&gt;&gt;Alice: Great!</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="in">~~~</span></span></code></pre></div>
+</div>
+<div style="width: 45%; vertical-align: top;">
+<p><img
+data-src="data:image/svg+xml;base64,PHN2ZyBpZD0ibWVybWFpZC0xNjgzMTA3MDM1NDY2IiB3aWR0aD0iMTAwJSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBoZWlnaHQ9IjI1OSIgc3R5bGU9Im1heC13aWR0aDogNTAxcHg7IGJhY2tncm91bmQtY29sb3I6IHdoaXRlOyIgdmlld0JveD0iLTUwIC0xMCA1MDEgMjU5Ij48c3R5bGU+I21lcm1haWQtMTY4MzEwNzAzNTQ2NiB7Zm9udC1mYW1pbHk6InRyZWJ1Y2hldCBtcyIsdmVyZGFuYSxhcmlhbCxzYW5zLXNlcmlmO2ZvbnQtc2l6ZToxNnB4O2ZpbGw6IzMzMzt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAuZXJyb3ItaWNvbntmaWxsOiM1NTIyMjI7fSNtZXJtYWlkLTE2ODMxMDcwMzU0NjYgLmVycm9yLXRleHR7ZmlsbDojNTUyMjIyO3N0cm9rZTojNTUyMjIyO30jbWVybWFpZC0xNjgzMTA3MDM1NDY2IC5lZGdlLXRoaWNrbmVzcy1ub3JtYWx7c3Ryb2tlLXdpZHRoOjJweDt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAuZWRnZS10aGlja25lc3MtdGhpY2t7c3Ryb2tlLXdpZHRoOjMuNXB4O30jbWVybWFpZC0xNjgzMTA3MDM1NDY2IC5lZGdlLXBhdHRlcm4tc29saWR7c3Ryb2tlLWRhc2hhcnJheTowO30jbWVybWFpZC0xNjgzMTA3MDM1NDY2IC5lZGdlLXBhdHRlcm4tZGFzaGVke3N0cm9rZS1kYXNoYXJyYXk6Mzt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAuZWRnZS1wYXR0ZXJuLWRvdHRlZHtzdHJva2UtZGFzaGFycmF5OjI7fSNtZXJtYWlkLTE2ODMxMDcwMzU0NjYgLm1hcmtlcntmaWxsOiMzMzMzMzM7c3Ryb2tlOiMzMzMzMzM7fSNtZXJtYWlkLTE2ODMxMDcwMzU0NjYgLm1hcmtlci5jcm9zc3tzdHJva2U6IzMzMzMzMzt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiBzdmd7Zm9udC1mYW1pbHk6InRyZWJ1Y2hldCBtcyIsdmVyZGFuYSxhcmlhbCxzYW5zLXNlcmlmO2ZvbnQtc2l6ZToxNnB4O30jbWVybWFpZC0xNjgzMTA3MDM1NDY2IC5hY3RvcntzdHJva2U6aHNsKDI1OS42MjYxNjgyMjQzLCA1OS43NzY1MzYzMTI4JSwgODcuOTAxOTYwNzg0MyUpO2ZpbGw6I0VDRUNGRjt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiB0ZXh0LmFjdG9yJmd0O3RzcGFue2ZpbGw6YmxhY2s7c3Ryb2tlOm5vbmU7fSNtZXJtYWlkLTE2ODMxMDcwMzU0NjYgLmFjdG9yLWxpbmV7c3Ryb2tlOmdyZXk7fSNtZXJtYWlkLTE2ODMxMDcwMzU0NjYgLm1lc3NhZ2VMaW5lMHtzdHJva2Utd2lkdGg6MS41O3N0cm9rZS1kYXNoYXJyYXk6bm9uZTtzdHJva2U6IzMzMzt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAubWVzc2FnZUxpbmUxe3N0cm9rZS13aWR0aDoxLjU7c3Ryb2tlLWRhc2hhcnJheToyLDI7c3Ryb2tlOiMzMzM7fSNtZXJtYWlkLTE2ODMxMDcwMzU0NjYgI2Fycm93aGVhZCBwYXRoe2ZpbGw6IzMzMztzdHJva2U6IzMzMzt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAuc2VxdWVuY2VOdW1iZXJ7ZmlsbDp3aGl0ZTt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAjc2VxdWVuY2VudW1iZXJ7ZmlsbDojMzMzO30jbWVybWFpZC0xNjgzMTA3MDM1NDY2ICNjcm9zc2hlYWQgcGF0aHtmaWxsOiMzMzM7c3Ryb2tlOiMzMzM7fSNtZXJtYWlkLTE2ODMxMDcwMzU0NjYgLm1lc3NhZ2VUZXh0e2ZpbGw6IzMzMztzdHJva2U6IzMzMzt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAubGFiZWxCb3h7c3Ryb2tlOmhzbCgyNTkuNjI2MTY4MjI0MywgNTkuNzc2NTM2MzEyOCUsIDg3LjkwMTk2MDc4NDMlKTtmaWxsOiNFQ0VDRkY7fSNtZXJtYWlkLTE2ODMxMDcwMzU0NjYgLmxhYmVsVGV4dCwjbWVybWFpZC0xNjgzMTA3MDM1NDY2IC5sYWJlbFRleHQmZ3Q7dHNwYW57ZmlsbDpibGFjaztzdHJva2U6bm9uZTt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAubG9vcFRleHQsI21lcm1haWQtMTY4MzEwNzAzNTQ2NiAubG9vcFRleHQmZ3Q7dHNwYW57ZmlsbDpibGFjaztzdHJva2U6bm9uZTt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAubG9vcExpbmV7c3Ryb2tlLXdpZHRoOjJweDtzdHJva2UtZGFzaGFycmF5OjIsMjtzdHJva2U6aHNsKDI1OS42MjYxNjgyMjQzLCA1OS43NzY1MzYzMTI4JSwgODcuOTAxOTYwNzg0MyUpO2ZpbGw6aHNsKDI1OS42MjYxNjgyMjQzLCA1OS43NzY1MzYzMTI4JSwgODcuOTAxOTYwNzg0MyUpO30jbWVybWFpZC0xNjgzMTA3MDM1NDY2IC5ub3Rle3N0cm9rZTojYWFhYTMzO2ZpbGw6I2ZmZjVhZDt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAubm90ZVRleHQsI21lcm1haWQtMTY4MzEwNzAzNTQ2NiAubm90ZVRleHQmZ3Q7dHNwYW57ZmlsbDpibGFjaztzdHJva2U6bm9uZTt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAuYWN0aXZhdGlvbjB7ZmlsbDojZjRmNGY0O3N0cm9rZTojNjY2O30jbWVybWFpZC0xNjgzMTA3MDM1NDY2IC5hY3RpdmF0aW9uMXtmaWxsOiNmNGY0ZjQ7c3Ryb2tlOiM2NjY7fSNtZXJtYWlkLTE2ODMxMDcwMzU0NjYgLmFjdGl2YXRpb24ye2ZpbGw6I2Y0ZjRmNDtzdHJva2U6IzY2Njt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAuYWN0b3JQb3B1cE1lbnV7cG9zaXRpb246YWJzb2x1dGU7fSNtZXJtYWlkLTE2ODMxMDcwMzU0NjYgLmFjdG9yUG9wdXBNZW51UGFuZWx7cG9zaXRpb246YWJzb2x1dGU7ZmlsbDojRUNFQ0ZGO2JveC1zaGFkb3c6MHB4IDhweCAxNnB4IDBweCByZ2JhKDAsMCwwLDAuMik7ZmlsdGVyOmRyb3Atc2hhZG93KDNweCA1cHggMnB4IHJnYigwIDAgMCAvIDAuNCkpO30jbWVybWFpZC0xNjgzMTA3MDM1NDY2IC5hY3Rvci1tYW4gbGluZXtzdHJva2U6aHNsKDI1OS42MjYxNjgyMjQzLCA1OS43NzY1MzYzMTI4JSwgODcuOTAxOTYwNzg0MyUpO2ZpbGw6I0VDRUNGRjt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiAuYWN0b3ItbWFuIGNpcmNsZSwjbWVybWFpZC0xNjgzMTA3MDM1NDY2IGxpbmV7c3Ryb2tlOmhzbCgyNTkuNjI2MTY4MjI0MywgNTkuNzc2NTM2MzEyOCUsIDg3LjkwMTk2MDc4NDMlKTtmaWxsOiNFQ0VDRkY7c3Ryb2tlLXdpZHRoOjJweDt9I21lcm1haWQtMTY4MzEwNzAzNTQ2NiA6cm9vdHstLW1lcm1haWQtZm9udC1mYW1pbHk6InRyZWJ1Y2hldCBtcyIsdmVyZGFuYSxhcmlhbCxzYW5zLXNlcmlmO308L3N0eWxlPjxnPjwvZz48ZGVmcz48c3ltYm9sIGlkPSJjb21wdXRlciIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCB0cmFuc2Zvcm09InNjYWxlKC41KSIgZD0iTTIgMnYxM2gyMHYtMTNoLTIwem0xOCAxMWgtMTZ2LTloMTZ2OXptLTEwLjIyOCA2bC40NjYtMWgzLjUyNGwuNDY3IDFoLTQuNDU3em0xNC4yMjggM2gtMjRsMi02aDIuMTA0bC0xLjMzIDRoMTguNDVsLTEuMjk3LTRoMi4wNzNsMiA2em0tNS0xMGgtMTR2LTdoMTR2N3oiPjwvcGF0aD48L3N5bWJvbD48L2RlZnM+PGRlZnM+PHN5bWJvbCBpZD0iZGF0YWJhc2UiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIj48cGF0aCB0cmFuc2Zvcm09InNjYWxlKC41KSIgZD0iTTEyLjI1OC4wMDFsLjI1Ni4wMDQuMjU1LjAwNS4yNTMuMDA4LjI1MS4wMS4yNDkuMDEyLjI0Ny4wMTUuMjQ2LjAxNi4yNDIuMDE5LjI0MS4wMi4yMzkuMDIzLjIzNi4wMjQuMjMzLjAyNy4yMzEuMDI4LjIyOS4wMzEuMjI1LjAzMi4yMjMuMDM0LjIyLjAzNi4yMTcuMDM4LjIxNC4wNC4yMTEuMDQxLjIwOC4wNDMuMjA1LjA0NS4yMDEuMDQ2LjE5OC4wNDguMTk0LjA1LjE5MS4wNTEuMTg3LjA1My4xODMuMDU0LjE4LjA1Ni4xNzUuMDU3LjE3Mi4wNTkuMTY4LjA2LjE2My4wNjEuMTYuMDYzLjE1NS4wNjQuMTUuMDY2LjA3NC4wMzMuMDczLjAzMy4wNzEuMDM0LjA3LjAzNC4wNjkuMDM1LjA2OC4wMzUuMDY3LjAzNS4wNjYuMDM1LjA2NC4wMzYuMDY0LjAzNi4wNjIuMDM2LjA2LjAzNi4wNi4wMzcuMDU4LjAzNy4wNTguMDM3LjA1NS4wMzguMDU1LjAzOC4wNTMuMDM4LjA1Mi4wMzguMDUxLjAzOS4wNS4wMzkuMDQ4LjAzOS4wNDcuMDM5LjA0NS4wNC4wNDQuMDQuMDQzLjA0LjA0MS4wNC4wNC4wNDEuMDM5LjA0MS4wMzcuMDQxLjAzNi4wNDEuMDM0LjA0MS4wMzMuMDQyLjAzMi4wNDIuMDMuMDQyLjAyOS4wNDIuMDI3LjA0Mi4wMjYuMDQzLjAyNC4wNDMuMDIzLjA0My4wMjEuMDQzLjAyLjA0My4wMTguMDQ0LjAxNy4wNDMuMDE1LjA0NC4wMTMuMDQ0LjAxMi4wNDQuMDExLjA0NS4wMDkuMDQ0LjAwNy4wNDUuMDA2LjA0NS4wMDQuMDQ1LjAwMi4wNDUuMDAxLjA0NXYxN2wtLjAwMS4wNDUtLjAwMi4wNDUtLjAwNC4wNDUtLjAwNi4wNDUtLjAwNy4wNDUtLjAwOS4wNDQtLjAxMS4wNDUtLjAxMi4wNDQtLjAxMy4wNDQtLjAxNS4wNDQtLjAxNy4wNDMtLjAxOC4wNDQtLjAyLjA0My0uMDIxLjA0My0uMDIzLjA0My0uMDI0LjA0My0uMDI2LjA0My0uMDI3LjA0Mi0uMDI5LjA0Mi0uMDMuMDQyLS4wMzIuMDQyLS4wMzMuMDQyLS4wMzQuMDQxLS4wMzYuMDQxLS4wMzcuMDQxLS4wMzkuMDQxLS4wNC4wNDEtLjA0MS4wNC0uMDQzLjA0LS4wNDQuMDQtLjA0NS4wNC0uMDQ3LjAzOS0uMDQ4LjAzOS0uMDUuMDM5LS4wNTEuMDM5LS4wNTIuMDM4LS4wNTMuMDM4LS4wNTUuMDM4LS4wNTUuMDM4LS4wNTguMDM3LS4wNTguMDM3LS4wNi4wMzctLjA2LjAzNi0uMDYyLjAzNi0uMDY0LjAzNi0uMDY0LjAzNi0uMDY2LjAzNS0uMDY3LjAzNS0uMDY4LjAzNS0uMDY5LjAzNS0uMDcuMDM0LS4wNzEuMDM0LS4wNzMuMDMzLS4wNzQuMDMzLS4xNS4wNjYtLjE1NS4wNjQtLjE2LjA2My0uMTYzLjA2MS0uMTY4LjA2LS4xNzIuMDU5LS4xNzUuMDU3LS4xOC4wNTYtLjE4My4wNTQtLjE4Ny4wNTMtLjE5MS4wNTEtLjE5NC4wNS0uMTk4LjA0OC0uMjAxLjA0Ni0uMjA1LjA0NS0uMjA4LjA0My0uMjExLjA0MS0uMjE0LjA0LS4yMTcuMDM4LS4yMi4wMzYtLjIyMy4wMzQtLjIyNS4wMzItLjIyOS4wMzEtLjIzMS4wMjgtLjIzMy4wMjctLjIzNi4wMjQtLjIzOS4wMjMtLjI0MS4wMi0uMjQyLjAxOS0uMjQ2LjAxNi0uMjQ3LjAxNS0uMjQ5LjAxMi0uMjUxLjAxLS4yNTMuMDA4LS4yNTUuMDA1LS4yNTYuMDA0LS4yNTguMDAxLS4yNTgtLjAwMS0uMjU2LS4wMDQtLjI1NS0uMDA1LS4yNTMtLjAwOC0uMjUxLS4wMS0uMjQ5LS4wMTItLjI0Ny0uMDE1LS4yNDUtLjAxNi0uMjQzLS4wMTktLjI0MS0uMDItLjIzOC0uMDIzLS4yMzYtLjAyNC0uMjM0LS4wMjctLjIzMS0uMDI4LS4yMjgtLjAzMS0uMjI2LS4wMzItLjIyMy0uMDM0LS4yMi0uMDM2LS4yMTctLjAzOC0uMjE0LS4wNC0uMjExLS4wNDEtLjIwOC0uMDQzLS4yMDQtLjA0NS0uMjAxLS4wNDYtLjE5OC0uMDQ4LS4xOTUtLjA1LS4xOS0uMDUxLS4xODctLjA1My0uMTg0LS4wNTQtLjE3OS0uMDU2LS4xNzYtLjA1Ny0uMTcyLS4wNTktLjE2Ny0uMDYtLjE2NC0uMDYxLS4xNTktLjA2My0uMTU1LS4wNjQtLjE1MS0uMDY2LS4wNzQtLjAzMy0uMDcyLS4wMzMtLjA3Mi0uMDM0LS4wNy0uMDM0LS4wNjktLjAzNS0uMDY4LS4wMzUtLjA2Ny0uMDM1LS4wNjYtLjAzNS0uMDY0LS4wMzYtLjA2My0uMDM2LS4wNjItLjAzNi0uMDYxLS4wMzYtLjA2LS4wMzctLjA1OC0uMDM3LS4wNTctLjAzNy0uMDU2LS4wMzgtLjA1NS0uMDM4LS4wNTMtLjAzOC0uMDUyLS4wMzgtLjA1MS0uMDM5LS4wNDktLjAzOS0uMDQ5LS4wMzktLjA0Ni0uMDM5LS4wNDYtLjA0LS4wNDQtLjA0LS4wNDMtLjA0LS4wNDEtLjA0LS4wNC0uMDQxLS4wMzktLjA0MS0uMDM3LS4wNDEtLjAzNi0uMDQxLS4wMzQtLjA0MS0uMDMzLS4wNDItLjAzMi0uMDQyLS4wMy0uMDQyLS4wMjktLjA0Mi0uMDI3LS4wNDItLjAyNi0uMDQzLS4wMjQtLjA0My0uMDIzLS4wNDMtLjAyMS0uMDQzLS4wMi0uMDQzLS4wMTgtLjA0NC0uMDE3LS4wNDMtLjAxNS0uMDQ0LS4wMTMtLjA0NC0uMDEyLS4wNDQtLjAxMS0uMDQ1LS4wMDktLjA0NC0uMDA3LS4wNDUtLjAwNi0uMDQ1LS4wMDQtLjA0NS0uMDAyLS4wNDUtLjAwMS0uMDQ1di0xN2wuMDAxLS4wNDUuMDAyLS4wNDUuMDA0LS4wNDUuMDA2LS4wNDUuMDA3LS4wNDUuMDA5LS4wNDQuMDExLS4wNDUuMDEyLS4wNDQuMDEzLS4wNDQuMDE1LS4wNDQuMDE3LS4wNDMuMDE4LS4wNDQuMDItLjA0My4wMjEtLjA0My4wMjMtLjA0My4wMjQtLjA0My4wMjYtLjA0My4wMjctLjA0Mi4wMjktLjA0Mi4wMy0uMDQyLjAzMi0uMDQyLjAzMy0uMDQyLjAzNC0uMDQxLjAzNi0uMDQxLjAzNy0uMDQxLjAzOS0uMDQxLjA0LS4wNDEuMDQxLS4wNC4wNDMtLjA0LjA0NC0uMDQuMDQ2LS4wNC4wNDYtLjAzOS4wNDktLjAzOS4wNDktLjAzOS4wNTEtLjAzOS4wNTItLjAzOC4wNTMtLjAzOC4wNTUtLjAzOC4wNTYtLjAzOC4wNTctLjAzNy4wNTgtLjAzNy4wNi0uMDM3LjA2MS0uMDM2LjA2Mi0uMDM2LjA2My0uMDM2LjA2NC0uMDM2LjA2Ni0uMDM1LjA2Ny0uMDM1LjA2OC0uMDM1LjA2OS0uMDM1LjA3LS4wMzQuMDcyLS4wMzQuMDcyLS4wMzMuMDc0LS4wMzMuMTUxLS4wNjYuMTU1LS4wNjQuMTU5LS4wNjMuMTY0LS4wNjEuMTY3LS4wNi4xNzItLjA1OS4xNzYtLjA1Ny4xNzktLjA1Ni4xODQtLjA1NC4xODctLjA1My4xOS0uMDUxLjE5NS0uMDUuMTk4LS4wNDguMjAxLS4wNDYuMjA0LS4wNDUuMjA4LS4wNDMuMjExLS4wNDEuMjE0LS4wNC4yMTctLjAzOC4yMi0uMDM2LjIyMy0uMDM0LjIyNi0uMDMyLjIyOC0uMDMxLjIzMS0uMDI4LjIzNC0uMDI3LjIzNi0uMDI0LjIzOC0uMDIzLjI0MS0uMDIuMjQzLS4wMTkuMjQ1LS4wMTYuMjQ3LS4wMTUuMjQ5LS4wMTIuMjUxLS4wMS4yNTMtLjAwOC4yNTUtLjAwNS4yNTYtLjAwNC4yNTgtLjAwMS4yNTguMDAxem0tOS4yNTggMjAuNDk5di4wMWwuMDAxLjAyMS4wMDMuMDIxLjAwNC4wMjIuMDA1LjAyMS4wMDYuMDIyLjAwNy4wMjIuMDA5LjAyMy4wMS4wMjIuMDExLjAyMy4wMTIuMDIzLjAxMy4wMjMuMDE1LjAyMy4wMTYuMDI0LjAxNy4wMjMuMDE4LjAyNC4wMTkuMDI0LjAyMS4wMjQuMDIyLjAyNS4wMjMuMDI0LjAyNC4wMjUuMDUyLjA0OS4wNTYuMDUuMDYxLjA1MS4wNjYuMDUxLjA3LjA1MS4wNzUuMDUxLjA3OS4wNTIuMDg0LjA1Mi4wODguMDUyLjA5Mi4wNTIuMDk3LjA1Mi4xMDIuMDUxLjEwNS4wNTIuMTEuMDUyLjExNC4wNTEuMTE5LjA1MS4xMjMuMDUxLjEyNy4wNS4xMzEuMDUuMTM1LjA1LjEzOS4wNDguMTQ0LjA0OS4xNDcuMDQ3LjE1Mi4wNDcuMTU1LjA0Ny4xNi4wNDUuMTYzLjA0NS4xNjcuMDQzLjE3MS4wNDMuMTc2LjA0MS4xNzguMDQxLjE4My4wMzkuMTg3LjAzOS4xOS4wMzcuMTk0LjAzNS4xOTcuMDM1LjIwMi4wMzMuMjA0LjAzMS4yMDkuMDMuMjEyLjAyOS4yMTYuMDI3LjIxOS4wMjUuMjIyLjAyNC4yMjYuMDIxLjIzLjAyLjIzMy4wMTguMjM2LjAxNi4yNC4wMTUuMjQzLjAxMi4yNDYuMDEuMjQ5LjAwOC4yNTMuMDA1LjI1Ni4wMDQuMjU5LjAwMS4yNi0uMDAxLjI1Ny0uMDA0LjI1NC0uMDA1LjI1LS4wMDguMjQ3LS4wMTEuMjQ0LS4wMTIuMjQxLS4wMTQuMjM3LS4wMTYuMjMzLS4wMTguMjMxLS4wMjEuMjI2LS4wMjEuMjI0LS4wMjQuMjItLjAyNi4yMTYtLjAyNy4yMTItLjAyOC4yMS0uMDMxLjIwNS0uMDMxLjIwMi0uMDM0LjE5OC0uMDM0LjE5NC0uMDM2LjE5MS0uMDM3LjE4Ny0uMDM5LjE4My0uMDQuMTc5LS4wNC4xNzUtLjA0Mi4xNzItLjA0My4xNjgtLjA0NC4xNjMtLjA0NS4xNi0uMDQ2LjE1NS0uMDQ2LjE1Mi0uMDQ3LjE0OC0uMDQ4LjE0My0uMDQ5LjEzOS0uMDQ5LjEzNi0uMDUuMTMxLS4wNS4xMjYtLjA1LjEyMy0uMDUxLjExOC0uMDUyLjExNC0uMDUxLjExLS4wNTIuMTA2LS4wNTIuMTAxLS4wNTIuMDk2LS4wNTIuMDkyLS4wNTIuMDg4LS4wNTMuMDgzLS4wNTEuMDc5LS4wNTIuMDc0LS4wNTIuMDctLjA1MS4wNjUtLjA1MS4wNi0uMDUxLjA1Ni0uMDUuMDUxLS4wNS4wMjMtLjAyNC4wMjMtLjAyNS4wMjEtLjAyNC4wMi0uMDI0LjAxOS0uMDI0LjAxOC0uMDI0LjAxNy0uMDI0LjAxNS0uMDIzLjAxNC0uMDI0LjAxMy0uMDIzLjAxMi0uMDIzLjAxLS4wMjMuMDEtLjAyMi4wMDgtLjAyMi4wMDYtLjAyMi4wMDYtLjAyMi4wMDQtLjAyMi4wMDQtLjAyMS4wMDEtLjAyMS4wMDEtLjAyMXYtNC4xMjdsLS4wNzcuMDU1LS4wOC4wNTMtLjA4My4wNTQtLjA4NS4wNTMtLjA4Ny4wNTItLjA5LjA1Mi0uMDkzLjA1MS0uMDk1LjA1LS4wOTcuMDUtLjEuMDQ5LS4xMDIuMDQ5LS4xMDUuMDQ4LS4xMDYuMDQ3LS4xMDkuMDQ3LS4xMTEuMDQ2LS4xMTQuMDQ1LS4xMTUuMDQ1LS4xMTguMDQ0LS4xMi4wNDMtLjEyMi4wNDItLjEyNC4wNDItLjEyNi4wNDEtLjEyOC4wNC0uMTMuMDQtLjEzMi4wMzgtLjEzNC4wMzgtLjEzNS4wMzctLjEzOC4wMzctLjEzOS4wMzUtLjE0Mi4wMzUtLjE0My4wMzQtLjE0NC4wMzMtLjE0Ny4wMzItLjE0OC4wMzEtLjE1LjAzLS4xNTEuMDMtLjE1My4wMjktLjE1NC4wMjctLjE1Ni4wMjctLjE1OC4wMjYtLjE1OS4wMjUtLjE2MS4wMjQtLjE2Mi4wMjMtLjE2My4wMjItLjE2NS4wMjEtLjE2Ni4wMi0uMTY3LjAxOS0uMTY5LjAxOC0uMTY5LjAxNy0uMTcxLjAxNi0uMTczLjAxNS0uMTczLjAxNC0uMTc1LjAxMy0uMTc1LjAxMi0uMTc3LjAxMS0uMTc4LjAxLS4xNzkuMDA4LS4xNzkuMDA4LS4xODEuMDA2LS4xODIuMDA1LS4xODIuMDA0LS4xODQuMDAzLS4xODQuMDAyaC0uMzdsLS4xODQtLjAwMi0uMTg0LS4wMDMtLjE4Mi0uMDA0LS4xODItLjAwNS0uMTgxLS4wMDYtLjE3OS0uMDA4LS4xNzktLjAwOC0uMTc4LS4wMS0uMTc2LS4wMTEtLjE3Ni0uMDEyLS4xNzUtLjAxMy0uMTczLS4wMTQtLjE3Mi0uMDE1LS4xNzEtLjAxNi0uMTctLjAxNy0uMTY5LS4wMTgtLjE2Ny0uMDE5LS4xNjYtLjAyLS4xNjUtLjAyMS0uMTYzLS4wMjItLjE2Mi0uMDIzLS4xNjEtLjAyNC0uMTU5LS4wMjUtLjE1Ny0uMDI2LS4xNTYtLjAyNy0uMTU1LS4wMjctLjE1My0uMDI5LS4xNTEtLjAzLS4xNS0uMDMtLjE0OC0uMDMxLS4xNDYtLjAzMi0uMTQ1LS4wMzMtLjE0My0uMDM0LS4xNDEtLjAzNS0uMTQtLjAzNS0uMTM3LS4wMzctLjEzNi0uMDM3LS4xMzQtLjAzOC0uMTMyLS4wMzgtLjEzLS4wNC0uMTI4LS4wNC0uMTI2LS4wNDEtLjEyNC0uMDQyLS4xMjItLjA0Mi0uMTItLjA0NC0uMTE3LS4wNDMtLjExNi0uMDQ1LS4xMTMtLjA0NS0uMTEyLS4wNDYtLjEwOS0uMDQ3LS4xMDYtLjA0Ny0uMTA1LS4wNDgtLjEwMi0uMDQ5LS4xLS4wNDktLjA5Ny0uMDUtLjA5NS0uMDUtLjA5My0uMDUyLS4wOS0uMDUxLS4wODctLjA1Mi0uMDg1LS4wNTMtLjA4My0uMDU0LS4wOC0uMDU0LS4wNzctLjA1NHY0LjEyN3ptMC01LjY1NHYuMDExbC4wMDEuMDIxLjAwMy4wMjEuMDA0LjAyMS4wMDUuMDIyLjAwNi4wMjIuMDA3LjAyMi4wMDkuMDIyLjAxLjAyMi4wMTEuMDIzLjAxMi4wMjMuMDEzLjAyMy4wMTUuMDI0LjAxNi4wMjMuMDE3LjAyNC4wMTguMDI0LjAxOS4wMjQuMDIxLjAyNC4wMjIuMDI0LjAyMy4wMjUuMDI0LjAyNC4wNTIuMDUuMDU2LjA1LjA2MS4wNS4wNjYuMDUxLjA3LjA1MS4wNzUuMDUyLjA3OS4wNTEuMDg0LjA1Mi4wODguMDUyLjA5Mi4wNTIuMDk3LjA1Mi4xMDIuMDUyLjEwNS4wNTIuMTEuMDUxLjExNC4wNTEuMTE5LjA1Mi4xMjMuMDUuMTI3LjA1MS4xMzEuMDUuMTM1LjA0OS4xMzkuMDQ5LjE0NC4wNDguMTQ3LjA0OC4xNTIuMDQ3LjE1NS4wNDYuMTYuMDQ1LjE2My4wNDUuMTY3LjA0NC4xNzEuMDQyLjE3Ni4wNDIuMTc4LjA0LjE4My4wNC4xODcuMDM4LjE5LjAzNy4xOTQuMDM2LjE5Ny4wMzQuMjAyLjAzMy4yMDQuMDMyLjIwOS4wMy4yMTIuMDI4LjIxNi4wMjcuMjE5LjAyNS4yMjIuMDI0LjIyNi4wMjIuMjMuMDIuMjMzLjAxOC4yMzYuMDE2LjI0LjAxNC4yNDMuMDEyLjI0Ni4wMS4yNDkuMDA4LjI1My4wMDYuMjU2LjAwMy4yNTkuMDAxLjI2LS4wMDEuMjU3LS4wMDMuMjU0LS4wMDYuMjUtLjAwOC4yNDctLjAxLjI0NC0uMDEyLjI0MS0uMDE1LjIzNy0uMDE2LjIzMy0uMDE4LjIzMS0uMDIuMjI2LS4wMjIuMjI0LS4wMjQuMjItLjAyNS4yMTYtLjAyNy4yMTItLjAyOS4yMS0uMDMuMjA1LS4wMzIuMjAyLS4wMzMuMTk4LS4wMzUuMTk0LS4wMzYuMTkxLS4wMzcuMTg3LS4wMzkuMTgzLS4wMzkuMTc5LS4wNDEuMTc1LS4wNDIuMTcyLS4wNDMuMTY4LS4wNDQuMTYzLS4wNDUuMTYtLjA0NS4xNTUtLjA0Ny4xNTItLjA0Ny4xNDgtLjA0OC4xNDMtLjA0OC4xMzktLjA1LjEzNi0uMDQ5LjEzMS0uMDUuMTI2LS4wNTEuMTIzLS4wNTEuMTE4LS4wNTEuMTE0LS4wNTIuMTEtLjA1Mi4xMDYtLjA1Mi4xMDEtLjA1Mi4wOTYtLjA1Mi4wOTItLjA1Mi4wODgtLjA1Mi4wODMtLjA1Mi4wNzktLjA1Mi4wNzQtLjA1MS4wNy0uMDUyLjA2NS0uMDUxLjA2LS4wNS4wNTYtLjA1MS4wNTEtLjA0OS4wMjMtLjAyNS4wMjMtLjAyNC4wMjEtLjAyNS4wMi0uMDI0LjAxOS0uMDI0LjAxOC0uMDI0LjAxNy0uMDI0LjAxNS0uMDIzLjAxNC0uMDIzLjAxMy0uMDI0LjAxMi0uMDIyLjAxLS4wMjMuMDEtLjAyMy4wMDgtLjAyMi4wMDYtLjAyMi4wMDYtLjAyMi4wMDQtLjAyMS4wMDQtLjAyMi4wMDEtLjAyMS4wMDEtLjAyMXYtNC4xMzlsLS4wNzcuMDU0LS4wOC4wNTQtLjA4My4wNTQtLjA4NS4wNTItLjA4Ny4wNTMtLjA5LjA1MS0uMDkzLjA1MS0uMDk1LjA1MS0uMDk3LjA1LS4xLjA0OS0uMTAyLjA0OS0uMTA1LjA0OC0uMTA2LjA0Ny0uMTA5LjA0Ny0uMTExLjA0Ni0uMTE0LjA0NS0uMTE1LjA0NC0uMTE4LjA0NC0uMTIuMDQ0LS4xMjIuMDQyLS4xMjQuMDQyLS4xMjYuMDQxLS4xMjguMDQtLjEzLjAzOS0uMTMyLjAzOS0uMTM0LjAzOC0uMTM1LjAzNy0uMTM4LjAzNi0uMTM5LjAzNi0uMTQyLjAzNS0uMTQzLjAzMy0uMTQ0LjAzMy0uMTQ3LjAzMy0uMTQ4LjAzMS0uMTUuMDMtLjE1MS4wMy0uMTUzLjAyOC0uMTU0LjAyOC0uMTU2LjAyNy0uMTU4LjAyNi0uMTU5LjAyNS0uMTYxLjAyNC0uMTYyLjAyMy0uMTYzLjAyMi0uMTY1LjAyMS0uMTY2LjAyLS4xNjcuMDE5LS4xNjkuMDE4LS4xNjkuMDE3LS4xNzEuMDE2LS4xNzMuMDE1LS4xNzMuMDE0LS4xNzUuMDEzLS4xNzUuMDEyLS4xNzcuMDExLS4xNzguMDA5LS4xNzkuMDA5LS4xNzkuMDA3LS4xODEuMDA3LS4xODIuMDA1LS4xODIuMDA0LS4xODQuMDAzLS4xODQuMDAyaC0uMzdsLS4xODQtLjAwMi0uMTg0LS4wMDMtLjE4Mi0uMDA0LS4xODItLjAwNS0uMTgxLS4wMDctLjE3OS0uMDA3LS4xNzktLjAwOS0uMTc4LS4wMDktLjE3Ni0uMDExLS4xNzYtLjAxMi0uMTc1LS4wMTMtLjE3My0uMDE0LS4xNzItLjAxNS0uMTcxLS4wMTYtLjE3LS4wMTctLjE2OS0uMDE4LS4xNjctLjAxOS0uMTY2LS4wMi0uMTY1LS4wMjEtLjE2My0uMDIyLS4xNjItLjAyMy0uMTYxLS4wMjQtLjE1OS0uMDI1LS4xNTctLjAyNi0uMTU2LS4wMjctLjE1NS0uMDI4LS4xNTMtLjAyOC0uMTUxLS4wMy0uMTUtLjAzLS4xNDgtLjAzMS0uMTQ2LS4wMzMtLjE0NS0uMDMzLS4xNDMtLjAzMy0uMTQxLS4wMzUtLjE0LS4wMzYtLjEzNy0uMDM2LS4xMzYtLjAzNy0uMTM0LS4wMzgtLjEzMi0uMDM5LS4xMy0uMDM5LS4xMjgtLjA0LS4xMjYtLjA0MS0uMTI0LS4wNDItLjEyMi0uMDQzLS4xMi0uMDQzLS4xMTctLjA0NC0uMTE2LS4wNDQtLjExMy0uMDQ2LS4xMTItLjA0Ni0uMTA5LS4wNDYtLjEwNi0uMDQ3LS4xMDUtLjA0OC0uMTAyLS4wNDktLjEtLjA0OS0uMDk3LS4wNS0uMDk1LS4wNTEtLjA5My0uMDUxLS4wOS0uMDUxLS4wODctLjA1My0uMDg1LS4wNTItLjA4My0uMDU0LS4wOC0uMDU0LS4wNzctLjA1NHY0LjEzOXptMC01LjY2NnYuMDExbC4wMDEuMDIuMDAzLjAyMi4wMDQuMDIxLjAwNS4wMjIuMDA2LjAyMS4wMDcuMDIyLjAwOS4wMjMuMDEuMDIyLjAxMS4wMjMuMDEyLjAyMy4wMTMuMDIzLjAxNS4wMjMuMDE2LjAyNC4wMTcuMDI0LjAxOC4wMjMuMDE5LjAyNC4wMjEuMDI1LjAyMi4wMjQuMDIzLjAyNC4wMjQuMDI1LjA1Mi4wNS4wNTYuMDUuMDYxLjA1LjA2Ni4wNTEuMDcuMDUxLjA3NS4wNTIuMDc5LjA1MS4wODQuMDUyLjA4OC4wNTIuMDkyLjA1Mi4wOTcuMDUyLjEwMi4wNTIuMTA1LjA1MS4xMS4wNTIuMTE0LjA1MS4xMTkuMDUxLjEyMy4wNTEuMTI3LjA1LjEzMS4wNS4xMzUuMDUuMTM5LjA0OS4xNDQuMDQ4LjE0Ny4wNDguMTUyLjA0Ny4xNTUuMDQ2LjE2LjA0NS4xNjMuMDQ1LjE2Ny4wNDMuMTcxLjA0My4xNzYuMDQyLjE3OC4wNC4xODMuMDQuMTg3LjAzOC4xOS4wMzcuMTk0LjAzNi4xOTcuMDM0LjIwMi4wMzMuMjA0LjAzMi4yMDkuMDMuMjEyLjAyOC4yMTYuMDI3LjIxOS4wMjUuMjIyLjAyNC4yMjYuMDIxLjIzLjAyLjIzMy4wMTguMjM2LjAxNy4yNC4wMTQuMjQzLjAxMi4yNDYuMDEuMjQ5LjAwOC4yNTMuMDA2LjI1Ni4wMDMuMjU5LjAwMS4yNi0uMDAxLjI1Ny0uMDAzLjI1NC0uMDA2LjI1LS4wMDguMjQ3LS4wMS4yNDQtLjAxMy4yNDEtLjAxNC4yMzctLjAxNi4yMzMtLjAxOC4yMzEtLjAyLjIyNi0uMDIyLjIyNC0uMDI0LjIyLS4wMjUuMjE2LS4wMjcuMjEyLS4wMjkuMjEtLjAzLjIwNS0uMDMyLjIwMi0uMDMzLjE5OC0uMDM1LjE5NC0uMDM2LjE5MS0uMDM3LjE4Ny0uMDM5LjE4My0uMDM5LjE3OS0uMDQxLjE3NS0uMDQyLjE3Mi0uMDQzLjE2OC0uMDQ0LjE2My0uMDQ1LjE2LS4wNDUuMTU1LS4wNDcuMTUyLS4wNDcuMTQ4LS4wNDguMTQzLS4wNDkuMTM5LS4wNDkuMTM2LS4wNDkuMTMxLS4wNTEuMTI2LS4wNS4xMjMtLjA1MS4xMTgtLjA1Mi4xMTQtLjA1MS4xMS0uMDUyLjEwNi0uMDUyLjEwMS0uMDUyLjA5Ni0uMDUyLjA5Mi0uMDUyLjA4OC0uMDUyLjA4My0uMDUyLjA3OS0uMDUyLjA3NC0uMDUyLjA3LS4wNTEuMDY1LS4wNTEuMDYtLjA1MS4wNTYtLjA1LjA1MS0uMDQ5LjAyMy0uMDI1LjAyMy0uMDI1LjAyMS0uMDI0LjAyLS4wMjQuMDE5LS4wMjQuMDE4LS4wMjQuMDE3LS4wMjQuMDE1LS4wMjMuMDE0LS4wMjQuMDEzLS4wMjMuMDEyLS4wMjMuMDEtLjAyMi4wMS0uMDIzLjAwOC0uMDIyLjAwNi0uMDIyLjAwNi0uMDIyLjAwNC0uMDIyLjAwNC0uMDIxLjAwMS0uMDIxLjAwMS0uMDIxdi00LjE1M2wtLjA3Ny4wNTQtLjA4LjA1NC0uMDgzLjA1My0uMDg1LjA1My0uMDg3LjA1My0uMDkuMDUxLS4wOTMuMDUxLS4wOTUuMDUxLS4wOTcuMDUtLjEuMDQ5LS4xMDIuMDQ4LS4xMDUuMDQ4LS4xMDYuMDQ4LS4xMDkuMDQ2LS4xMTEuMDQ2LS4xMTQuMDQ2LS4xMTUuMDQ0LS4xMTguMDQ0LS4xMi4wNDMtLjEyMi4wNDMtLjEyNC4wNDItLjEyNi4wNDEtLjEyOC4wNC0uMTMuMDM5LS4xMzIuMDM5LS4xMzQuMDM4LS4xMzUuMDM3LS4xMzguMDM2LS4xMzkuMDM2LS4xNDIuMDM0LS4xNDMuMDM0LS4xNDQuMDMzLS4xNDcuMDMyLS4xNDguMDMyLS4xNS4wMy0uMTUxLjAzLS4xNTMuMDI4LS4xNTQuMDI4LS4xNTYuMDI3LS4xNTguMDI2LS4xNTkuMDI0LS4xNjEuMDI0LS4xNjIuMDIzLS4xNjMuMDIzLS4xNjUuMDIxLS4xNjYuMDItLjE2Ny4wMTktLjE2OS4wMTgtLjE2OS4wMTctLjE3MS4wMTYtLjE3My4wMTUtLjE3My4wMTQtLjE3NS4wMTMtLjE3NS4wMTItLjE3Ny4wMS0uMTc4LjAxLS4xNzkuMDA5LS4xNzkuMDA3LS4xODEuMDA2LS4xODIuMDA2LS4xODIuMDA0LS4xODQuMDAzLS4xODQuMDAxLS4xODUuMDAxLS4xODUtLjAwMS0uMTg0LS4wMDEtLjE4NC0uMDAzLS4xODItLjAwNC0uMTgyLS4wMDYtLjE4MS0uMDA2LS4xNzktLjAwNy0uMTc5LS4wMDktLjE3OC0uMDEtLjE3Ni0uMDEtLjE3Ni0uMDEyLS4xNzUtLjAxMy0uMTczLS4wMTQtLjE3Mi0uMDE1LS4xNzEtLjAxNi0uMTctLjAxNy0uMTY5LS4wMTgtLjE2Ny0uMDE5LS4xNjYtLjAyLS4xNjUtLjAyMS0uMTYzLS4wMjMtLjE2Mi0uMDIzLS4xNjEtLjAyNC0uMTU5LS4wMjQtLjE1Ny0uMDI2LS4xNTYtLjAyNy0uMTU1LS4wMjgtLjE1My0uMDI4LS4xNTEtLjAzLS4xNS0uMDMtLjE0OC0uMDMyLS4xNDYtLjAzMi0uMTQ1LS4wMzMtLjE0My0uMDM0LS4xNDEtLjAzNC0uMTQtLjAzNi0uMTM3LS4wMzYtLjEzNi0uMDM3LS4xMzQtLjAzOC0uMTMyLS4wMzktLjEzLS4wMzktLjEyOC0uMDQxLS4xMjYtLjA0MS0uMTI0LS4wNDEtLjEyMi0uMDQzLS4xMi0uMDQzLS4xMTctLjA0NC0uMTE2LS4wNDQtLjExMy0uMDQ2LS4xMTItLjA0Ni0uMTA5LS4wNDYtLjEwNi0uMDQ4LS4xMDUtLjA0OC0uMTAyLS4wNDgtLjEtLjA1LS4wOTctLjA0OS0uMDk1LS4wNTEtLjA5My0uMDUxLS4wOS0uMDUyLS4wODctLjA1Mi0uMDg1LS4wNTMtLjA4My0uMDUzLS4wOC0uMDU0LS4wNzctLjA1NHY0LjE1M3ptOC43NC04LjE3OWwtLjI1Ny4wMDQtLjI1NC4wMDUtLjI1LjAwOC0uMjQ3LjAxMS0uMjQ0LjAxMi0uMjQxLjAxNC0uMjM3LjAxNi0uMjMzLjAxOC0uMjMxLjAyMS0uMjI2LjAyMi0uMjI0LjAyMy0uMjIuMDI2LS4yMTYuMDI3LS4yMTIuMDI4LS4yMS4wMzEtLjIwNS4wMzItLjIwMi4wMzMtLjE5OC4wMzQtLjE5NC4wMzYtLjE5MS4wMzgtLjE4Ny4wMzgtLjE4My4wNC0uMTc5LjA0MS0uMTc1LjA0Mi0uMTcyLjA0My0uMTY4LjA0My0uMTYzLjA0NS0uMTYuMDQ2LS4xNTUuMDQ2LS4xNTIuMDQ4LS4xNDguMDQ4LS4xNDMuMDQ4LS4xMzkuMDQ5LS4xMzYuMDUtLjEzMS4wNS0uMTI2LjA1MS0uMTIzLjA1MS0uMTE4LjA1MS0uMTE0LjA1Mi0uMTEuMDUyLS4xMDYuMDUyLS4xMDEuMDUyLS4wOTYuMDUyLS4wOTIuMDUyLS4wODguMDUyLS4wODMuMDUyLS4wNzkuMDUyLS4wNzQuMDUxLS4wNy4wNTItLjA2NS4wNTEtLjA2LjA1LS4wNTYuMDUtLjA1MS4wNS0uMDIzLjAyNS0uMDIzLjAyNC0uMDIxLjAyNC0uMDIuMDI1LS4wMTkuMDI0LS4wMTguMDI0LS4wMTcuMDIzLS4wMTUuMDI0LS4wMTQuMDIzLS4wMTMuMDIzLS4wMTIuMDIzLS4wMS4wMjMtLjAxLjAyMi0uMDA4LjAyMi0uMDA2LjAyMy0uMDA2LjAyMS0uMDA0LjAyMi0uMDA0LjAyMS0uMDAxLjAyMS0uMDAxLjAyMS4wMDEuMDIxLjAwMS4wMjEuMDA0LjAyMS4wMDQuMDIyLjAwNi4wMjEuMDA2LjAyMy4wMDguMDIyLjAxLjAyMi4wMS4wMjMuMDEyLjAyMy4wMTMuMDIzLjAxNC4wMjMuMDE1LjAyNC4wMTcuMDIzLjAxOC4wMjQuMDE5LjAyNC4wMi4wMjUuMDIxLjAyNC4wMjMuMDI0LjAyMy4wMjUuMDUxLjA1LjA1Ni4wNS4wNi4wNS4wNjUuMDUxLjA3LjA1Mi4wNzQuMDUxLjA3OS4wNTIuMDgzLjA1Mi4wODguMDUyLjA5Mi4wNTIuMDk2LjA1Mi4xMDEuMDUyLjEwNi4wNTIuMTEuMDUyLjExNC4wNTIuMTE4LjA1MS4xMjMuMDUxLjEyNi4wNTEuMTMxLjA1LjEzNi4wNS4xMzkuMDQ5LjE0My4wNDguMTQ4LjA0OC4xNTIuMDQ4LjE1NS4wNDYuMTYuMDQ2LjE2My4wNDUuMTY4LjA0My4xNzIuMDQzLjE3NS4wNDIuMTc5LjA0MS4xODMuMDQuMTg3LjAzOC4xOTEuMDM4LjE5NC4wMzYuMTk4LjAzNC4yMDIuMDMzLjIwNS4wMzIuMjEuMDMxLjIxMi4wMjguMjE2LjAyNy4yMi4wMjYuMjI0LjAyMy4yMjYuMDIyLjIzMS4wMjEuMjMzLjAxOC4yMzcuMDE2LjI0MS4wMTQuMjQ0LjAxMi4yNDcuMDExLjI1LjAwOC4yNTQuMDA1LjI1Ny4wMDQuMjYuMDAxLjI2LS4wMDEuMjU3LS4wMDQuMjU0LS4wMDUuMjUtLjAwOC4yNDctLjAxMS4yNDQtLjAxMi4yNDEtLjAxNC4yMzctLjAxNi4yMzMtLjAxOC4yMzEtLjAyMS4yMjYtLjAyMi4yMjQtLjAyMy4yMi0uMDI2LjIxNi0uMDI3LjIxMi0uMDI4LjIxLS4wMzEuMjA1LS4wMzIuMjAyLS4wMzMuMTk4LS4wMzQuMTk0LS4wMzYuMTkxLS4wMzguMTg3LS4wMzguMTgzLS4wNC4xNzktLjA0MS4xNzUtLjA0Mi4xNzItLjA0My4xNjgtLjA0My4xNjMtLjA0NS4xNi0uMDQ2LjE1NS0uMDQ2LjE1Mi0uMDQ4LjE0OC0uMDQ4LjE0My0uMDQ4LjEzOS0uMDQ5LjEzNi0uMDUuMTMxLS4wNS4xMjYtLjA1MS4xMjMtLjA1MS4xMTgtLjA1MS4xMTQtLjA1Mi4xMS0uMDUyLjEwNi0uMDUyLjEwMS0uMDUyLjA5Ni0uMDUyLjA5Mi0uMDUyLjA4OC0uMDUyLjA4My0uMDUyLjA3OS0uMDUyLjA3NC0uMDUxLjA3LS4wNTIuMDY1LS4wNTEuMDYtLjA1LjA1Ni0uMDUuMDUxLS4wNS4wMjMtLjAyNS4wMjMtLjAyNC4wMjEtLjAyNC4wMi0uMDI1LjAxOS0uMDI0LjAxOC0uMDI0LjAxNy0uMDIzLjAxNS0uMDI0LjAxNC0uMDIzLjAxMy0uMDIzLjAxMi0uMDIzLjAxLS4wMjMuMDEtLjAyMi4wMDgtLjAyMi4wMDYtLjAyMy4wMDYtLjAyMS4wMDQtLjAyMi4wMDQtLjAyMS4wMDEtLjAyMS4wMDEtLjAyMS0uMDAxLS4wMjEtLjAwMS0uMDIxLS4wMDQtLjAyMS0uMDA0LS4wMjItLjAwNi0uMDIxLS4wMDYtLjAyMy0uMDA4LS4wMjItLjAxLS4wMjItLjAxLS4wMjMtLjAxMi0uMDIzLS4wMTMtLjAyMy0uMDE0LS4wMjMtLjAxNS0uMDI0LS4wMTctLjAyMy0uMDE4LS4wMjQtLjAxOS0uMDI0LS4wMi0uMDI1LS4wMjEtLjAyNC0uMDIzLS4wMjQtLjAyMy0uMDI1LS4wNTEtLjA1LS4wNTYtLjA1LS4wNi0uMDUtLjA2NS0uMDUxLS4wNy0uMDUyLS4wNzQtLjA1MS0uMDc5LS4wNTItLjA4My0uMDUyLS4wODgtLjA1Mi0uMDkyLS4wNTItLjA5Ni0uMDUyLS4xMDEtLjA1Mi0uMTA2LS4wNTItLjExLS4wNTItLjExNC0uMDUyLS4xMTgtLjA1MS0uMTIzLS4wNTEtLjEyNi0uMDUxLS4xMzEtLjA1LS4xMzYtLjA1LS4xMzktLjA0OS0uMTQzLS4wNDgtLjE0OC0uMDQ4LS4xNTItLjA0OC0uMTU1LS4wNDYtLjE2LS4wNDYtLjE2My0uMDQ1LS4xNjgtLjA0My0uMTcyLS4wNDMtLjE3NS0uMDQyLS4xNzktLjA0MS0uMTgzLS4wNC0uMTg3LS4wMzgtLjE5MS0uMDM4LS4xOTQtLjAzNi0uMTk4LS4wMzQtLjIwMi0uMDMzLS4yMDUtLjAzMi0uMjEtLjAzMS0uMjEyLS4wMjgtLjIxNi0uMDI3LS4yMi0uMDI2LS4yMjQtLjAyMy0uMjI2LS4wMjItLjIzMS0uMDIxLS4yMzMtLjAxOC0uMjM3LS4wMTYtLjI0MS0uMDE0LS4yNDQtLjAxMi0uMjQ3LS4wMTEtLjI1LS4wMDgtLjI1NC0uMDA1LS4yNTctLjAwNC0uMjYtLjAwMS0uMjYuMDAxeiI+PC9wYXRoPjwvc3ltYm9sPjwvZGVmcz48ZGVmcz48c3ltYm9sIGlkPSJjbG9jayIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48cGF0aCB0cmFuc2Zvcm09InNjYWxlKC41KSIgZD0iTTEyIDJjNS41MTQgMCAxMCA0LjQ4NiAxMCAxMHMtNC40ODYgMTAtMTAgMTAtMTAtNC40ODYtMTAtMTAgNC40ODYtMTAgMTAtMTB6bTAtMmMtNi42MjcgMC0xMiA1LjM3My0xMiAxMnM1LjM3MyAxMiAxMiAxMiAxMi01LjM3MyAxMi0xMi01LjM3My0xMi0xMi0xMnptNS44NDggMTIuNDU5Yy4yMDIuMDM4LjIwMi4zMzMuMDAxLjM3Mi0xLjkwNy4zNjEtNi4wNDUgMS4xMTEtNi41NDcgMS4xMTEtLjcxOSAwLTEuMzAxLS41ODItMS4zMDEtMS4zMDEgMC0uNTEyLjc3LTUuNDQ3IDEuMTI1LTcuNDQ1LjAzNC0uMTkyLjMxMi0uMTgxLjM0My4wMTRsLjk4NSA2LjIzOCA1LjM5NCAxLjAxMXoiPjwvcGF0aD48L3N5bWJvbD48L2RlZnM+PGc+PGxpbmUgaWQ9ImFjdG9yMCIgeDE9Ijc1IiB5MT0iNSIgeDI9Ijc1IiB5Mj0iMTkzIiBjbGFzcz0iMjAwIiBzdHJva2Utd2lkdGg9IjAuNXB4IiBzdHJva2U9IiM5OTkiPjwvbGluZT48ZyBpZD0icm9vdC0wIj48cmVjdCB4PSIwIiB5PSIwIiBmaWxsPSIjZWFlYWVhIiBzdHJva2U9IiM2NjYiIHdpZHRoPSIxNTAiIGhlaWdodD0iNjUiIHJ4PSIzIiByeT0iMyIgY2xhc3M9ImFjdG9yIj48L3JlY3Q+PHRleHQgeD0iNzUiIHk9IjMyLjUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiBhbGlnbm1lbnQtYmFzZWxpbmU9ImNlbnRyYWwiIGNsYXNzPSJhY3RvciIgc3R5bGU9InRleHQtYW5jaG9yOiBtaWRkbGU7IGZvbnQtc2l6ZTogMTRweDsgZm9udC13ZWlnaHQ6IDQwMDsgZm9udC1mYW1pbHk6IE9wZW4tU2FucywgJnF1b3Q7c2Fucy1zZXJpZiZxdW90OzsiPjx0c3BhbiB4PSI3NSIgZHk9IjAiPkFsaWNlPC90c3Bhbj48L3RleHQ+PC9nPjwvZz48Zz48bGluZSBpZD0iYWN0b3IxIiB4MT0iMzI2IiB5MT0iNSIgeDI9IjMyNiIgeTI9IjE5MyIgY2xhc3M9IjIwMCIgc3Ryb2tlLXdpZHRoPSIwLjVweCIgc3Ryb2tlPSIjOTk5Ij48L2xpbmU+PGcgaWQ9InJvb3QtMSI+PHJlY3QgeD0iMjUxIiB5PSIwIiBmaWxsPSIjZWFlYWVhIiBzdHJva2U9IiM2NjYiIHdpZHRoPSIxNTAiIGhlaWdodD0iNjUiIHJ4PSIzIiByeT0iMyIgY2xhc3M9ImFjdG9yIj48L3JlY3Q+PHRleHQgeD0iMzI2IiB5PSIzMi41IiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgYWxpZ25tZW50LWJhc2VsaW5lPSJjZW50cmFsIiBjbGFzcz0iYWN0b3IiIHN0eWxlPSJ0ZXh0LWFuY2hvcjogbWlkZGxlOyBmb250LXNpemU6IDE0cHg7IGZvbnQtd2VpZ2h0OiA0MDA7IGZvbnQtZmFtaWx5OiBPcGVuLVNhbnMsICZxdW90O3NhbnMtc2VyaWYmcXVvdDs7Ij48dHNwYW4geD0iMzI2IiBkeT0iMCI+Sm9objwvdHNwYW4+PC90ZXh0PjwvZz48L2c+PGRlZnM+PG1hcmtlciBpZD0iYXJyb3doZWFkIiByZWZYPSI5IiByZWZZPSI1IiBtYXJrZXJVbml0cz0idXNlclNwYWNlT25Vc2UiIG1hcmtlcldpZHRoPSIxMiIgbWFya2VySGVpZ2h0PSIxMiIgb3JpZW50PSJhdXRvIj48cGF0aCBkPSJNIDAgMCBMIDEwIDUgTCAwIDEwIHoiPjwvcGF0aD48L21hcmtlcj48L2RlZnM+PGRlZnM+PG1hcmtlciBpZD0iY3Jvc3NoZWFkIiBtYXJrZXJXaWR0aD0iMTUiIG1hcmtlckhlaWdodD0iOCIgb3JpZW50PSJhdXRvIiByZWZYPSIxNiIgcmVmWT0iNCI+PHBhdGggZmlsbD0iYmxhY2siIHN0cm9rZT0iIzAwMDAwMCIgc3Ryb2tlLXdpZHRoPSIxcHgiIGQ9Ik0gOSwyIFYgNiBMMTYsNCBaIiBzdHlsZT0ic3Ryb2tlLWRhc2hhcnJheTogMCwgMDsiPjwvcGF0aD48cGF0aCBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAwMDAiIHN0cm9rZS13aWR0aD0iMXB4IiBkPSJNIDAsMSBMIDYsNyBNIDYsMSBMIDAsNyIgc3R5bGU9InN0cm9rZS1kYXNoYXJyYXk6IDAsIDA7Ij48L3BhdGg+PC9tYXJrZXI+PC9kZWZzPjxkZWZzPjxtYXJrZXIgaWQ9ImZpbGxlZC1oZWFkIiByZWZYPSIxOCIgcmVmWT0iNyIgbWFya2VyV2lkdGg9IjIwIiBtYXJrZXJIZWlnaHQ9IjI4IiBvcmllbnQ9ImF1dG8iPjxwYXRoIGQ9Ik0gMTgsNyBMOSwxMyBMMTQsNyBMOSwxIFoiPjwvcGF0aD48L21hcmtlcj48L2RlZnM+PGRlZnM+PG1hcmtlciBpZD0ic2VxdWVuY2VudW1iZXIiIHJlZlg9IjE1IiByZWZZPSIxNSIgbWFya2VyV2lkdGg9IjYwIiBtYXJrZXJIZWlnaHQ9IjQwIiBvcmllbnQ9ImF1dG8iPjxjaXJjbGUgY3g9IjE1IiBjeT0iMTUiIHI9IjYiPjwvY2lyY2xlPjwvbWFya2VyPjwvZGVmcz48dGV4dCB4PSIyMDEiIHk9IjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9Im1lc3NhZ2VUZXh0IiBkeT0iMWVtIiBzdHlsZT0iZm9udC1mYW1pbHk6ICZxdW90O3RyZWJ1Y2hldCBtcyZxdW90OywgdmVyZGFuYSwgYXJpYWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTZweDsgZm9udC13ZWlnaHQ6IDQwMDsiPkhlbGxvIEpvaG4sIGhvdyBhcmUgeW91PzwvdGV4dD48bGluZSB4MT0iNzUiIHkxPSIxMDkiIHgyPSIzMjYiIHkyPSIxMDkiIGNsYXNzPSJtZXNzYWdlTGluZTAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSJub25lIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93aGVhZCkiIHN0eWxlPSJmaWxsOiBub25lOyI+PC9saW5lPjx0ZXh0IHg9IjIwMSIgeT0iMTI0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkb21pbmFudC1iYXNlbGluZT0ibWlkZGxlIiBhbGlnbm1lbnQtYmFzZWxpbmU9Im1pZGRsZSIgY2xhc3M9Im1lc3NhZ2VUZXh0IiBkeT0iMWVtIiBzdHlsZT0iZm9udC1mYW1pbHk6ICZxdW90O3RyZWJ1Y2hldCBtcyZxdW90OywgdmVyZGFuYSwgYXJpYWwsIHNhbnMtc2VyaWY7IGZvbnQtc2l6ZTogMTZweDsgZm9udC13ZWlnaHQ6IDQwMDsiPkdyZWF0ITwvdGV4dD48bGluZSB4MT0iMzI2IiB5MT0iMTUzIiB4Mj0iNzUiIHkyPSIxNTMiIGNsYXNzPSJtZXNzYWdlTGluZTEiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSJub25lIiBtYXJrZXItZW5kPSJ1cmwoI2Fycm93aGVhZCkiIHN0eWxlPSJzdHJva2UtZGFzaGFycmF5OiAzLCAzOyBmaWxsOiBub25lOyI+PC9saW5lPjxnPjxyZWN0IHg9IjAiIHk9IjE3MyIgZmlsbD0iI2VhZWFlYSIgc3Ryb2tlPSIjNjY2IiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjY1IiByeD0iMyIgcnk9IjMiIGNsYXNzPSJhY3RvciI+PC9yZWN0Pjx0ZXh0IHg9Ijc1IiB5PSIyMDUuNSIgZG9taW5hbnQtYmFzZWxpbmU9ImNlbnRyYWwiIGFsaWdubWVudC1iYXNlbGluZT0iY2VudHJhbCIgY2xhc3M9ImFjdG9yIiBzdHlsZT0idGV4dC1hbmNob3I6IG1pZGRsZTsgZm9udC1zaXplOiAxNHB4OyBmb250LXdlaWdodDogNDAwOyBmb250LWZhbWlseTogT3Blbi1TYW5zLCAmcXVvdDtzYW5zLXNlcmlmJnF1b3Q7OyI+PHRzcGFuIHg9Ijc1IiBkeT0iMCI+QWxpY2U8L3RzcGFuPjwvdGV4dD48L2c+PGc+PHJlY3QgeD0iMjUxIiB5PSIxNzMiIGZpbGw9IiNlYWVhZWEiIHN0cm9rZT0iIzY2NiIgd2lkdGg9IjE1MCIgaGVpZ2h0PSI2NSIgcng9IjMiIHJ5PSIzIiBjbGFzcz0iYWN0b3IiPjwvcmVjdD48dGV4dCB4PSIzMjYiIHk9IjIwNS41IiBkb21pbmFudC1iYXNlbGluZT0iY2VudHJhbCIgYWxpZ25tZW50LWJhc2VsaW5lPSJjZW50cmFsIiBjbGFzcz0iYWN0b3IiIHN0eWxlPSJ0ZXh0LWFuY2hvcjogbWlkZGxlOyBmb250LXNpemU6IDE0cHg7IGZvbnQtd2VpZ2h0OiA0MDA7IGZvbnQtZmFtaWx5OiBPcGVuLVNhbnMsICZxdW90O3NhbnMtc2VyaWYmcXVvdDs7Ij48dHNwYW4geD0iMzI2IiBkeT0iMCI+Sm9objwvdHNwYW4+PC90ZXh0PjwvZz48L3N2Zz4="
+alt="" /></p>
+</div>
+</div>
+</section>
+<section id="more" class="slide level2">
+<h2>More</h2>
+<p>Example presentation by J. Reagle: <a
+href="https://reagle.org/joseph/talks/2014/exemplar.md">Markdown</a> and
+<a
+href="https://reagle.org/joseph/talks/2014/exemplar.html">HTML</a></p>
+</section></section>
+<section id="acknowledgements" class="title-slide slide level1">
+<h1>Acknowledgements</h1>
+<p><a href="https://revealjs.com"><img src="https://revealjs.com/images/logo/reveal-black-text.svg" style="height: 30px; vertical-align: middle;"></a>
+presentation framework</p>
+<p><a href="https://groups.google.com/g/pandoc-discuss/c/1bKIuyBnWaQ"><img src="https://groups.google.com/group/pandoc-discuss/attach/dd1e7eb3e2439/Sketch16021313.png?part=0.1&view=1" style="height: 30px; vertical-align: middle;"></a>
+<a href="https://pandoc.org">Pandoc</a> document converter</p>
+<p><a href="https://mermaid.js.org/"><img src="https://raw.githubusercontent.com/mermaid-js/mermaid/develop/docs/public/favicon.svg" style="height: 30px; vertical-align: middle;"></a>
+diagrams and charts</p>
+<p><a href="https://taskfile.dev/"><img src="https://taskfile.dev/img/logo.svg" style="height: 30px; vertical-align: middle;">
+Task</a> runner / build tool</p>
+<p><a
+href="https://fontawesome.com/"><i class="fa-solid fa-font-awesome"></i>
+Font Awesome</a> icons</p>
+</section>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/reveal.js@^4//dist/reveal.js"></script>
+
+  <!-- reveal.js plugins -->
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: false,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: true,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'slide',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'fade',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
