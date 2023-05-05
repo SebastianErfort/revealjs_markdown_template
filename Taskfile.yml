@@ -57,4 +57,4 @@ tasks:
     generates:
       - README.html
     method: timestamp # instead of default checksum
-    # silent: true
+    silent: true
